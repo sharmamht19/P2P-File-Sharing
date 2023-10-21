@@ -1,13 +1,27 @@
 # Peer-to-Peer Group Based File Sharing System
 
+A robust peer-to-peer (P2P) file sharing system designed for efficient sharing and downloading within specific groups. The system uses SHA1 hashing to ensure file integrity and provides parallel downloading capabilities from multiple peers.
+
+## Table of Contents
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Tracker](#tracker)
+  - [Client](#client)
+- [System Workflow](#system-workflow)
+- [Assumptions & Limitations](#assumptions--limitations)
+
 ## Prerequisites
 
-**Software Requirement**
-
-- G++ compiler
-  - To install G++: `sudo apt-get install g++`
-- OpenSSL library
-  - To install OpenSSL library: `sudo apt-get install openssl`
+### Software Requirements:
+- **G++ Compiler**
+  ```bash
+  sudo apt-get install g++
+```
+- **OpenSSL library**
+  ```bash
+  sudo apt-get install openssl
+```
 
 **Platform:** Linux
 
@@ -143,31 +157,19 @@ show_downloads
 stop_share ​<group_id> <file_name>
 ```
 
+## System Workflow
+- Users register and log in.
+- Tracker maintains client details.
+- Create/join groups.
+- Group admins manage join requests.
+- Share files across groups, notifying the tracker.
+- List all sharable files within groups.
+- Download files from multiple peers.
+- SHA1 ensures file integrity during transfers.
 
-## Working
+## Assumptions & Limitations
+- A single always-online tracker is implemented.
+- Peers can use different IPs, but session data isn't persistent.
+- Potential SHA1 inconsistency with binary files.
+- Use absolute file paths.
 
-1. User should create an account and register with the tracker.
-2. Login using the user credentials.
-3. The tracker maintains information of clients and their shared files to assist in communication between peers.
-4. User can create a Group and become the admin of that Group.
-5. User can fetch a list of all Groups in the server.
-6. User can join/leave a Group.
-7. Group admin can accept Group joining requests.
-8. Share a file across a Group: Shares the filename and SHA1 hash of the complete file, as well as piecewise SHA1 hashes, with the tracker.
-9. Fetch a list of all sharable files in a Group.
-10. Download a file:
- 1. Retrieve peer information for the file from the tracker.
- 2. Download the file from multiple peers simultaneously using a piece selection algorithm.
- 3. All downloaded files will be shareable to other users in the same Group. File integrity is ensured using SHA1 comparison.
-11. Piece selection algorithm: Selects a random piece and downloads it from a random peer that has that piece.
-12. Show ongoing downloads.
-13. Stop sharing a file.
-14. Logout, which stops sharing all files.
-15. When a client logs in, all previously shared files before logout will automatically be in sharing mode.
-
-## Assumptions
-
-1. Only one tracker is implemented, and it should always be online.
-2. The peer can log in from different IP addresses, but the details of their downloads/uploads will not persist across sessions.
-3. SHA1 integrity checking may not work correctly for binary files, although the downloaded files are likely to be correct.
-4. File paths should be absolute.
