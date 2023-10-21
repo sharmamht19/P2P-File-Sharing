@@ -17,7 +17,7 @@ A robust peer-to-peer (P2P) file sharing system designed for efficient sharing a
 - **G++ Compiler**
   ```bash
   sudo apt-get install g++
-```
+  ```
 - **OpenSSL library**
   ```bash
   sudo apt-get install openssl
